@@ -4,6 +4,7 @@
 # Author(s): Darryl Ming Sen Lee 
 
 fileName= simple_c_program
+##
 
 flash:
 	gcc -std=c99 -Wall $(fileName).c -o $(fileName)
