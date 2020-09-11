@@ -1,11 +1,14 @@
-Script started on 2020-09-11 17:30:26-0400
-]0;dzr8322@login: ~/Documents/CS4541/Assignment_0dzr8322@login:~/Documents/CS4541/Assignment_0$ make flash
+Script started on 2020-09-11 19:33:45-0400
+]0;dzr8322@login: ~/Documents/CS4541/Assignment_0dzr8322@login:~/Documents/CS4541/Assignment_0$ make f[Kall
 gcc -std=c99 -Wall simple_c_program.c -o simple_c_program
+]0;dzr8322@login: ~/Documents/CS4541/Assignment_0dzr8322@login:~/Documents/CS4541/Assignment_0$ make run
 ./simple_c_program
 Hello World!
-]0;dzr8322@login: ~/Documents/CS4541/Assignment_0dzr8322@login:~/Documents/CS4541/Assignment_0$ make rm[Kemove
+]0;dzr8322@login: ~/Documents/CS4541/Assignment_0dzr8322@login:~/Documents/CS4541/Assignment_0$ make remove
+make: *** No rule to make target 'remove'.  Stop.
+]0;dzr8322@login: ~/Documents/CS4541/Assignment_0dzr8322@login:~/Documents/CS4541/Assignment_0$ make clean
 rm simple_c_program
 ]0;dzr8322@login: ~/Documents/CS4541/Assignment_0dzr8322@login:~/Documents/CS4541/Assignment_0$ exit
 exit
 
-Script done on 2020-09-11 17:31:39-0400
+Script done on 2020-09-11 19:34:50-0400
