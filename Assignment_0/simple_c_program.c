@@ -4,9 +4,10 @@ Class: CS4541
 Assignment: Assignment 0 - Simple C Program  
 Author(s): Darryl Ming Sen Lee 
 */
+#include<stdio.h>
 
 int main(){
-    print("Hello World!\n");
+    printf("Hello World!\n");
 
     return 0;
 }

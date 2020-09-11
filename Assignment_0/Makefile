@@ -12,5 +12,3 @@ flash:
 
 remove:
 	rm $(fileName)
-	
-
