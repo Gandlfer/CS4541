@@ -1,0 +1,11 @@
+Script started on 2020-09-11 17:30:26-0400
+]0;dzr8322@login: ~/Documents/CS4541/Assignment_0dzr8322@login:~/Documents/CS4541/Assignment_0$ make flash
+gcc -std=c99 -Wall simple_c_program.c -o simple_c_program
+./simple_c_program
+Hello World!
+]0;dzr8322@login: ~/Documents/CS4541/Assignment_0dzr8322@login:~/Documents/CS4541/Assignment_0$ make rm[Kemove
+rm simple_c_program
+]0;dzr8322@login: ~/Documents/CS4541/Assignment_0dzr8322@login:~/Documents/CS4541/Assignment_0$ exit
+exit
+
+Script done on 2020-09-11 17:31:39-0400
