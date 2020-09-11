@@ -4,11 +4,12 @@
 # Author(s): Darryl Ming Sen Lee 
 
 fileName= simple_c_program
-##
 
-flash:
+all:
 	gcc -std=c99 -Wall $(fileName).c -o $(fileName)
+
+run: 
 	./$(fileName)
 
-remove:
+clean:
 	rm $(fileName)
