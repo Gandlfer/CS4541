@@ -3,4 +3,6 @@ Class: CS4541
 Assignment: Assignment 0 - Simple C Program  
 Author(s): Darryl Ming Sen Lee 
 
-Command to run the code: make flash
+Command to run the code: 
+    make all
+    make run 
