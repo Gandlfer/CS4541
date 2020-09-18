@@ -1,0 +1,52 @@
+Script started on 2020-09-17 19:46:29-0700
+]0;darryllee1999@ubuntu: ~/CS4541/Assignment1[01;32mdarryllee1999@ubuntu[00m:[01;34m~/CS4541/Assignment1[00m$ make run[K[Kun[K[K[Kall
+gcc -std=c99 -Wall number_demo.c -o number_demo
+[01m[Knumber_demo.c:[m[K In function ‘[01m[Kmain[m[K’:
+[01m[Knumber_demo.c:48:21:[m[K [01;35m[Kwarning: [m[Kinteger overflow in expression [[01;35m[K-Woverflow[m[K]
+  p5_int_var1 = 50000[01;35m[K*[m[K50000;
+                     [01;35m[K^[m[K
+[01m[Knumber_demo.c:51:21:[m[K [01;35m[Kwarning: [m[Kinteger overflow in expression [[01;35m[K-Woverflow[m[K]
+  p5_int_var1 = 60000[01;35m[K*[m[K60000;
+                     [01;35m[K^[m[K
+[01m[Knumber_demo.c:54:21:[m[K [01;35m[Kwarning: [m[Kinteger overflow in expression [[01;35m[K-Woverflow[m[K]
+  p5_int_var1 = 70000[01;35m[K*[m[K70000;
+                     [01;35m[K^[m[K
+]0;darryllee1999@ubuntu: ~/CS4541/Assignment1[01;32mdarryllee1999@ubuntu[00m:[01;34m~/CS4541/Assignment1[00m$ make run
+./number_demo
+Problem 1
+2.5000000000
+
+
+Problem 2
+-0.1000000015
+
+
+Problem 3
+0.000000
+0.333333
+
+
+Problem 4
+9999999.340000
+9999999.000000
+
+
+Problem 5
+900000000
+1600000000
+-1794967296
+-694967296
+605032704
+
+
+Problem 6
+100000002004087734272.000000
+100000002004087734272.000000
+103500002601996386304.000000
+100000002004087734272.000000
+]0;darryllee1999@ubuntu: ~/CS4541/Assignment1[01;32mdarryllee1999@ubuntu[00m:[01;34m~/CS4541/Assignment1[00m$ make clean
+rm number_demo
+]0;darryllee1999@ubuntu: ~/CS4541/Assignment1[01;32mdarryllee1999@ubuntu[00m:[01;34m~/CS4541/Assignment1[00m$ exit
+exit
+
+Script done on 2020-09-17 19:46:56-0700
