@@ -4,7 +4,7 @@ class FileReader:
     def __init__(self,path):
         self.path=path
 
-    def __openfileObject__(self):
+    def openFileObject(self):
         fileOpen=open(self.path,"r")
         ls=[]
         with fileOpen as f:
@@ -14,10 +14,10 @@ class FileReader:
                 ls.append(data.replace("\n",""))
         return ls
 
-if __name__=="__main__":
-    #print(cpath)
-    FileReader("traces\\yi.trace").__openfileObject__()
-    s="string"
-    new_s=s.replace("s","t")
-    print(s)
-    print(new_s)
+# if __name__=="__main__":
+#     #print(cpath)
+#     FileReader("traces\\yi.trace").__openfileObject__()
+#     s="string"
+#     new_s=s.replace("s","t")
+#     print(s)
+#     print(new_s)
