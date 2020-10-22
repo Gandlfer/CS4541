@@ -6,7 +6,7 @@ if __name__=="__main__":
     if(len(sys.argv)>=1):
         pathIndex=sys.argv.index("-t")+1
         calls=FileReader(sys.argv[pathIndex]).openFileObject()
-        #cs=CacheSim(calls)
+        cs=CacheSim(calls)
         #Print step by step for cache
         if("v" in sys.argv[1]):
             for x in calls:
