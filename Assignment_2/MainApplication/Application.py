@@ -1,6 +1,6 @@
 import sys
-import Assignment_2.MainApplication.FileReader as FileReader
-import Assignment_2.MainApplication.CacheSimulator as CacheSim
+from FileReader import FileReader
+from CacheSimulator import CacheSim
 if __name__=="__main__":
     #./csim-ref -s 4 -E 1 -b 4 -t traces/yi.trace
     if(len(sys.argv)>=1):
