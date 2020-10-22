@@ -6,8 +6,13 @@ class FileReader:
 
     def __openfileObject__(self):
         fileOpen=open(self.path,"r")
+        ls=[]
         with fileOpen as f:
-            print(f.read())
+            data =f.read()
+            print(data)
+            if(data[0]!='I'):
+                ls.append(data.replace("\n",""))
+        return ls
 
 if __name__=="__main__":
     #print(cpath)
