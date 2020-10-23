@@ -5,26 +5,21 @@ class Block:
         self.tag=0
         self.valid=0
 
-    @property
-    def tag(self):
+    def get_tag(self):
         return self.tag
 
-    @property.setter
     def set_tag(self,tag):
         self.tag=tag
 
-    @property
-    def valid(self):
+    def get_valid(self):
         return self.valid
 
-    @property.setter
     def set_valid(self):
-        valid=valid^1
+        self.valid=self.valid^1
 
-    @property
     def byte(self):
         return self.byte
 
-    @property.setter
-    def set_byte(self,offset,data):
-        for
+    def byte(self,offset,readsize):
+        return
+        #for x in range(offset,offset+range)

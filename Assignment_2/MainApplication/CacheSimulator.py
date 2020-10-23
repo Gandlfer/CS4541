@@ -16,8 +16,8 @@ class CacheSim:
         return
     
     def readProcess(self,ls):
-        #for x in ls:
-
+        for x in ls:
+            
         return result
 
     def __load__(self,hexaddress,byte):
