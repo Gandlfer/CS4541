@@ -9,4 +9,4 @@ class Queue:
         self.ls.append(block)
     
     def get_size(self):
-        return len(ls)
+        return len(self.ls)
