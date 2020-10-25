@@ -17,9 +17,10 @@ class Block:
     def set_valid(self):
         self.valid=self.valid^1
 
-    def byte(self):
+    def get_byte(self):
         return self.byte
 
-    def byte(self,offset,readsize):
-        return
-        #for x in range(offset,offset+range)
+    def set_byte(self,offset,readsize):
+        for x in range(offset,offset+readsize):
+            self.byte[x]=1
+ 

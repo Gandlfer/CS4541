@@ -25,7 +25,7 @@ if __name__=="__main__":
                 sys.exit(0)
 
             cs=CacheSim(s,e,b)
-            cs.readProcess(calls)
+            print(cs.readProcess(calls))
 
         #Help Usage
         elif( "-h" in sys.argv[1]):

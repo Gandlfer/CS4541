@@ -1,5 +1,5 @@
 from Set import Set
-
+from Block import Block
 class CacheSim:
     def __init__(self,s,e,b):
         self.hitCount=0
@@ -33,8 +33,24 @@ class CacheSim:
         return result
 
     def __load__(self,op,byte):
-        self.cache[op[1]]
-        return None
+        
+        if(op[0] in self.cache.listOfTag(op[1])):
+            indexWithTag=self.cache.listOfTag(op[1]).index(op[0])
+            if(self.cache[op[1]].ls[indexWithTag].get_valid()==1):
+                self.hitCount+=1
+                return "hit "
+
+            else:
+                self.cache[op[1]].ls[indexWithTag].set_valid()
+                self.cache[op[1]].ls[indexWithTag].set_byte(op[2],byte)
+                return "miss "
+                
+        b=Block(2**self.b)
+        b.set_valid()
+        b.set_tag(op[0])
+        b.set_byte(byte)
+        return " miss "+self.cache[op[1]].eviction(b)
+
 
     def __store__(self,op,byte):
         return None
