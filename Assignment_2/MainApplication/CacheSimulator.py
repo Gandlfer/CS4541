@@ -44,11 +44,11 @@ class CacheSim:
                 self.cache[op[1]].ls[indexWithTag].set_valid()
                 self.cache[op[1]].ls[indexWithTag].set_byte(op[2],byte)
                 return "miss "
-                
+
         b=Block(2**self.b)
         b.set_valid()
         b.set_tag(op[0])
-        b.set_byte(byte)
+        b.set_byte(op[2],byte)
         return " miss "+self.cache[op[1]].eviction(b)
 
 
