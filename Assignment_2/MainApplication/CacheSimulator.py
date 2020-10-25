@@ -49,7 +49,7 @@ class CacheSim:
         b.set_valid()
         b.set_tag(op[0])
         b.set_byte(op[2],byte)
-        return " miss "+self.cache[op[1]].eviction(b)
+        return " miss "+self.cache.eviction(op[1],b)
 
 
     def __store__(self,op,byte):
