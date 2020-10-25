@@ -17,9 +17,9 @@ if __name__=="__main__":
             pathIndex=sys.argv.index("-t")+1
             calls=FileReader(sys.argv[pathIndex]).openFileObject()
             try:
-                s=sys.argv[int(sys.argv.index("-s")+1)]
-                e=sys.argv[int(sys.argv.index("-E")+1)]
-                b=sys.argv[int(sys.argv.index("-b")+1)]
+                s=int(sys.argv[int(sys.argv.index("-s")+1)])
+                e=int(sys.argv[int(sys.argv.index("-E")+1)])
+                b=int(sys.argv[int(sys.argv.index("-b")+1)])
             except(ValueError):
                 print("Invalid Value for -s -E -b\n")
                 sys.exit(0)
