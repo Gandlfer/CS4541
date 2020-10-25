@@ -9,9 +9,10 @@ class FileReader:
         ls=[]
         with fileOpen as f:
             data =f.read()
-            print(data)
+            #print(data)
             if(data[0]!='I'):
-                ls.append(data.replace("\n",""))
+                #ls.append(data.replace("\n",""))
+                ls.append(data)
         return ls
 
 # if __name__=="__main__":

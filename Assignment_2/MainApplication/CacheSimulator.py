@@ -28,6 +28,8 @@ class CacheSim:
                 value=self.__store__(op_addr,getbyte)
             elif(splitted[1]=="M"):
                 value=self.__modify__(op_addr,getbyte)
+            print(x + value)
+            print("\n")
             result.append(value)
 
         return result
