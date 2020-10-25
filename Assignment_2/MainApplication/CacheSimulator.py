@@ -40,13 +40,13 @@ class CacheSim:
             indexWithTag=self.cache.listOfTag(op[1]).index(op[0])
             print(f"Tag={op[0]} set={op[1]}")
             print(f"{type(self.cache)}")
-            if(self.cache[op[1]].ls[indexWithTag].get_valid()==1):
+            if(self.cache.cacheSystem[op[1]].ls[indexWithTag].get_valid()==1):
                 self.hitCount+=1
                 return " hit "
 
             else:
-                self.cache[op[1]].ls[indexWithTag].set_valid()
-                self.cache[op[1]].ls[indexWithTag].set_byte(op[2],byte)
+                self.cache.cacheSystem[op[1]].ls[indexWithTag].set_valid()
+                self.cache.cacheSystem[op[1]].ls[indexWithTag].set_byte(op[2],byte)
                 return " miss "
 
         b=Block(2**self.b)
@@ -61,14 +61,14 @@ class CacheSim:
             print(f"Tag={op[0]} set={op[1]}")
             print(f"{type(self.cache)}")
             #print(f"{type(self.cache[op[1]])}")
-            indexWithTag=self.cache.listOfTag(op[1]).index(op[0])
-            if(self.cache[op[1]].ls[indexWithTag].get_valid()==1):
+            indexWithTag=self.cache.cacheSystem.listOfTag(op[1]).index(op[0])
+            if(self.cache.cacheSystem[op[1]].ls[indexWithTag].get_valid()==1):
                 self.hitCount+=1
                 return " hit "
 
             else:
-                self.cache[op[1]].ls[indexWithTag].set_valid()
-                self.cache[op[1]].ls[indexWithTag].set_byte(op[2],byte)
+                self.cache.cacheSystem[op[1]].ls[indexWithTag].set_valid()
+                self.cache.cacheSystem[op[1]].ls[indexWithTag].set_byte(op[2],byte)
                 return " miss "
 
         b=Block(2**self.b)
