@@ -12,10 +12,11 @@ class Set:
             ls.append(x.get_tag())
         return ls
         
-    def eviction(self,sIndex,blockdata):
+    def eviction(self,sIndex,blockdata,incCount):
         evictionMsg=""
         if(self.cacheSystem[sIndex].get_size()==self.maxsize):
             self.cacheSystem[sIndex].dequeue()
+            incCount+=1
             evictionMsg="eviction"
         self.cacheSystem[sIndex].enqueue(blockdata)
 

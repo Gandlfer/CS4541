@@ -8,5 +8,6 @@ class FileReader:
         fileOpen=open(self.path,"r")
         ls=[]
         for x in fileOpen.readlines():
-            ls.append(x.replace("\n",""))
+            if(x[0]!="I"):
+                ls.append(x.replace("\n",""))
         return ls

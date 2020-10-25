@@ -4,7 +4,7 @@ class CacheSim:
     def __init__(self,s,e,b):
         self.hitCount=0
         self.missCount=0
-        self.eviction=0
+        self.evictionCount=0
         self.cache=Set(s,e,b)
         self.s=s
         self.e=e
@@ -13,18 +13,21 @@ class CacheSim:
     
     def readProcess(self,ls):
         result=[]
+        value=""
         for x in ls:
             splitted=x.split(" ")
             operation=splitted[2].split(",")
             #hexaddr=operation[0]
             op_addr=self.convertHextoInstruction(operation[0])
             getbyte=int(operation[1])
+            print(splitted[1])
             if(splitted[1]=="L"):
                 value=self.__load__(op_addr,getbyte)
             elif(splitted[1]=="S"):
                 value=self.__store__(op_addr,getbyte)
             elif(splitted[1]=="M"):
                 value=self.__modify__(op_addr,getbyte)
+            
             print(x + value)
             print("\n")
             result.append(value)
@@ -43,13 +46,16 @@ class CacheSim:
                 self.cache.cacheSystem[op[1]].ls[indexWithTag].set_valid()
                 self.cache.cacheSystem[op[1]].ls[indexWithTag].set_byte(op[2],byte)
                 self.missCount+=1
+                print(f"Called cold miss")
                 return " miss "
-
+        print(f"Called eviction miss")
         b=Block(2**self.b)
         b.set_valid()
         b.set_tag(op[0])
         b.set_byte(op[2],byte)
-        return " miss "+self.cache.eviction(op[1],b)
+        self.missCount+=1
+        #self.evictionCount+=1
+        return " miss "+self.cache.eviction(op[1],b,self.evictionCount)
 
 
     def __store__(self,op,byte):
@@ -63,15 +69,16 @@ class CacheSim:
                 self.cache.cacheSystem[op[1]].ls[indexWithTag].set_valid()
                 self.cache.cacheSystem[op[1]].ls[indexWithTag].set_byte(op[2],byte)
                 self.missCount+=1
+                print(f"Called cold miss")
                 return " miss "
-
+        print(f"Called eviction miss")
         b=Block(2**self.b)
         b.set_valid()
         b.set_tag(op[0])
         b.set_byte(op[2],byte)
         self.missCount+=1
-        self.evictionCount+=1
-        return " miss "+self.cache.eviction(op[1],b)
+        #self.evictionCount+=1
+        return " miss "+self.cache.eviction(op[1],b,self.evictionCount)
 
     def __modify__(self,op,byte):
         return self.__load__(op,byte) + self.__store__(op,byte)
