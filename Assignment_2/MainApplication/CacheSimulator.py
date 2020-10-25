@@ -38,12 +38,12 @@ class CacheSim:
             indexWithTag=self.cache.listOfTag(op[1]).index(op[0])
             if(self.cache[op[1]].ls[indexWithTag].get_valid()==1):
                 self.hitCount+=1
-                return "hit "
+                return " hit "
 
             else:
                 self.cache[op[1]].ls[indexWithTag].set_valid()
                 self.cache[op[1]].ls[indexWithTag].set_byte(op[2],byte)
-                return "miss "
+                return " miss "
 
         b=Block(2**self.b)
         b.set_valid()
@@ -53,10 +53,25 @@ class CacheSim:
 
 
     def __store__(self,op,byte):
-        return None
+        if(op[0] in self.cache.listOfTag(op[1])):
+            indexWithTag=self.cache.listOfTag(op[1]).index(op[0])
+            if(self.cache[op[1]].ls[indexWithTag].get_valid()==1):
+                self.hitCount+=1
+                return " hit "
+
+            else:
+                self.cache[op[1]].ls[indexWithTag].set_valid()
+                self.cache[op[1]].ls[indexWithTag].set_byte(op[2],byte)
+                return " miss "
+
+        b=Block(2**self.b)
+        b.set_valid()
+        b.set_tag(op[0])
+        b.set_byte(op[2],byte)
+        return " miss "+self.cache.eviction(op[1],b)
 
     def _modify__(self,op,byte):
-        return None
+        return self.__load__(op,byte) + self.__store__(op,byte)
 
     def convertHextoInstruction(self,hexaddress):
         operationInDecimal=int(hexaddress,16)

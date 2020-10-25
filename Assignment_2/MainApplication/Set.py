@@ -16,7 +16,7 @@ class Set:
         evictionMsg=""
         if(self.cacheSystem[sIndex].get_size()==self.maxsize):
             self.cacheSystem[sIndex].dequeue()
-            evictionMsg=" eviction"
+            evictionMsg="eviction"
         self.cacheSystem[sIndex].enqueue(blockdata)
 
         return evictionMsg
