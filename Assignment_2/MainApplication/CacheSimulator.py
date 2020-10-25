@@ -21,7 +21,7 @@ class CacheSim:
             operation=splitted[2].split(",")
             #hexaddr=operation[0]
             op_addr=self.convertHextoInstruction(operation[0])
-            getbyte=operation[1]
+            getbyte=int(operation[1])
             if(splitted[1]=="L"):
                 value=self.__load__(op_addr,getbyte)
             elif(splitted[1]=="S"):
