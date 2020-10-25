@@ -5,13 +5,6 @@ if __name__=="__main__":
     #./csim-ref -s 4 -E 1 -b 4 -t traces/yi.trace
     if(len(sys.argv)>=1):
         
-        # sIndex=sys.argv.index("-s")+1
-        # eIndex=sys.argv.index("-E")+1
-        # bIndex=sys.argv.index("-b")+1
-        # pathIndex=sys.argv.index("-t")+1
-        # calls=FileReader(sys.argv[pathIndex]).openFileObject()
-        #cs=CacheSim(calls)
-        #Print step by step for cache
         if(("v" in sys.argv[1] or "s" in sys.argv[1]) and "-s" in sys.argv and "-E" in sys.argv and "-b" in sys.argv and
             "-t" in sys.argv):
             pathIndex=sys.argv.index("-t")+1
@@ -25,8 +18,12 @@ if __name__=="__main__":
                 sys.exit(0)
 
             cs=CacheSim(s,e,b)
-            print(cs.readProcess(calls))
-
+            result=cs.readProcess(calls)
+            if("v" in sys.argv[1]):
+                for x in len(calls):
+                    print(f"{calls[x]} {result[x]}")
+            print(f"Hit: {cs.hitCount} Miss: {cs.missCount} Hit: {cs.evictionCount}")
+            
         #Help Usage
         elif( "-h" in sys.argv[1]):
             print("Usage: python3 Application.py [-hv] -s <s> -E <E> -b <b> -t <tracefile>\n\t"+

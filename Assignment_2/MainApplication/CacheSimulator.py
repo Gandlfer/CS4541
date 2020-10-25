@@ -35,8 +35,6 @@ class CacheSim:
         
         if(op[0] in self.cache.listOfTag(op[1])):
             indexWithTag=self.cache.listOfTag(op[1]).index(op[0])
-            print(f"Tag={op[0]} set={op[1]}")
-            print(f"{type(self.cache)}")
             if(self.cache.cacheSystem[op[1]].ls[indexWithTag].get_valid()==1):
                 self.hitCount+=1
                 return " hit "
@@ -44,6 +42,7 @@ class CacheSim:
             else:
                 self.cache.cacheSystem[op[1]].ls[indexWithTag].set_valid()
                 self.cache.cacheSystem[op[1]].ls[indexWithTag].set_byte(op[2],byte)
+                self.missCount+=1
                 return " miss "
 
         b=Block(2**self.b)
@@ -55,9 +54,6 @@ class CacheSim:
 
     def __store__(self,op,byte):
         if(op[0] in self.cache.listOfTag(op[1])):
-            print(f"Tag={op[0]} set={op[1]}")
-            print(f"{type(self.cache)}")
-            #print(f"{type(self.cache[op[1]])}")
             indexWithTag=self.cache.listOfTag(op[1]).index(op[0])
             if(self.cache.cacheSystem[op[1]].ls[indexWithTag].get_valid()==1):
                 self.hitCount+=1
@@ -66,15 +62,15 @@ class CacheSim:
             else:
                 self.cache.cacheSystem[op[1]].ls[indexWithTag].set_valid()
                 self.cache.cacheSystem[op[1]].ls[indexWithTag].set_byte(op[2],byte)
-		self.missCount+=1
+                self.missCount+=1
                 return " miss "
 
         b=Block(2**self.b)
         b.set_valid()
         b.set_tag(op[0])
         b.set_byte(op[2],byte)
-	self.missCount+=1
-	self.evictionCount+=1
+        self.missCount+=1
+        self.evictionCount+=1
         return " miss "+self.cache.eviction(op[1],b)
 
     def __modify__(self,op,byte):
