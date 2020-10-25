@@ -54,8 +54,8 @@ class CacheSim:
         b.set_tag(op[0])
         b.set_byte(op[2],byte)
         self.missCount+=1
-        #self.evictionCount+=1
-        return " miss "+self.cache.eviction(op[1],b,self.evictionCount)
+        self.evictionCount+=1
+        return " miss "+self.cache.eviction(op[1],b)
 
 
     def __store__(self,op,byte):
@@ -71,14 +71,14 @@ class CacheSim:
                 self.missCount+=1
                 print(f"Called cold miss")
                 return " miss "
+
         print(f"Called eviction miss")
         b=Block(2**self.b)
         b.set_valid()
         b.set_tag(op[0])
         b.set_byte(op[2],byte)
         self.missCount+=1
-        #self.evictionCount+=1
-        return " miss "+self.cache.eviction(op[1],b,self.evictionCount)
+        return " miss "+self.cache.eviction(op[1],b)
 
     def __modify__(self,op,byte):
         return self.__load__(op,byte) + self.__store__(op,byte)
