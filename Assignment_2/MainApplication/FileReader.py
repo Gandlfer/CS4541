@@ -1,5 +1,6 @@
 import os
 
+cur=os.getcwd()
 class FileReader:
     def __init__(self,path):
         self.path=path
@@ -7,17 +8,21 @@ class FileReader:
     def openFileObject(self):
         fileOpen=open(self.path,"r")
         ls=[]
-        with fileOpen as f:
-            data =f.read()
-            #print(data)
-            if(data[0]!='I'):
-                #ls.append(data.replace("\n",""))
-                ls.append(data)
+        for x in fileOpen.readlines():
+            ls.append(x.replace("\n",""))
+        # with fileOpen as f:
+        #     data =f.read()
+        #     #print(data)
+        #     if(data[0]!='I'):
+        #         #ls.append(data.replace("\n",""))
+        #         print(data)
+        #         ls.append(data)
+        #         print(ls)
         return ls
 
-# if __name__=="__main__":
-#     #print(cpath)
-#     FileReader("traces\\yi.trace").__openfileObject__()
+if __name__=="__main__":
+    calls=FileReader("C:\\Users\\darry\\Desktop\\WMU\\CS4541\\Assignment_2\\MainApplication\\traces/yi.trace").openFileObject()
+    print(calls)
 #     s="string"
 #     new_s=s.replace("s","t")
 #     print(s)
