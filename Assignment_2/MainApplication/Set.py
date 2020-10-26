@@ -12,12 +12,13 @@ class Set:
             ls.append(x.get_tag())
         return ls
         
-    def eviction(self,sIndex,blockdata):
-        self.cacheSystem[sIndex].dequeue()
+    def eviction(self,sIndex,blockdata,flag):
+        if(flag):
+            self.cacheSystem[sIndex].dequeue()
         self.cacheSystem[sIndex].enqueue(blockdata)
-
+            
     def queueFull(self,sIndex):
-        return self.cacheSystem[sIndex].get_size==self.maxsize
+        return self.cacheSystem[sIndex].get_size()==self.maxsize
 if __name__=="__main__":
     #q=Queue(3)
     # arr=[Queue(3)for x in range(2**2)]

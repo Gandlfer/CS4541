@@ -21,6 +21,8 @@ class Block:
         return self.byte
 
     def set_byte(self,offset,readsize):
+        print(f"From {offset} to {offset+readsize} max{len(self.byte)}")
         for x in range(offset,offset+readsize):
+            print(f"{x}\n")
             self.byte[x]=1
  

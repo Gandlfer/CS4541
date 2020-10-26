@@ -16,11 +16,12 @@ class CacheSim:
         value=""
         for x in ls:
             splitted=x.split(" ")
+            #print(splitted)
             operation=splitted[2].split(",")
             #hexaddr=operation[0]
             op_addr=self.convertHextoInstruction(operation[0])
             getbyte=int(operation[1])
-            print(splitted[1])
+            print(x)
             if(splitted[1]=="L"):
                 value=self.__load__(op_addr,getbyte)
             elif(splitted[1]=="S"):
@@ -28,7 +29,7 @@ class CacheSim:
             elif(splitted[1]=="M"):
                 value=self.__modify__(op_addr,getbyte)
             
-            print(x + value)
+            print(value)
             print("\n")
             result.append(value)
 
@@ -48,18 +49,20 @@ class CacheSim:
                 self.missCount+=1
                 print(f"Called cold miss")
                 return " miss "
+
         print(f"Called eviction miss")
+        self.missCount+=1
         b=Block(2**self.b)
         b.set_valid()
         b.set_tag(op[0])
         b.set_byte(op[2],byte)
 
-        if(self.cache.queueFull([op[1]])):        
-            self.cache.eviction(op[1],b)
+        if(self.cache.queueFull(op[1])):        
+            self.cache.eviction(op[1],b,True)
             self.evictionCount+=1
             return " miss eviction"
+        self.cache.eviction(op[1],b,False)
 
-        self.missCount+=1
         return " miss "
 
 
@@ -78,17 +81,18 @@ class CacheSim:
                 return " miss "
 
         print(f"Called eviction miss")
+        self.missCount+=1
         b=Block(2**self.b)
         b.set_valid()
         b.set_tag(op[0])
         b.set_byte(op[2],byte)
 
-        if(self.cache.queueFull([op[1]])):        
-            self.cache.eviction(op[1],b)
+        if(self.cache.queueFull(op[1])):        
+            self.cache.eviction(op[1],b,True)
             self.evictionCount+=1
             return " miss eviction"
+        self.cache.eviction(op[1],b,False)
 
-        self.missCount+=1
         return " miss "
 
     def __modify__(self,op,byte):
