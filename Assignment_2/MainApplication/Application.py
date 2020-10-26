@@ -19,9 +19,9 @@ if __name__=="__main__":
 
             cs=CacheSim(s,e,b)
             result=cs.readProcess(calls)
-            #if("v" in sys.argv[1]):
-                #for x in range(len(calls)):
-                    #print(f"{calls[x]} {result[x]}")
+            if("v" in sys.argv[1]):
+                for x in range(len(calls)):
+                    print(f"{calls[x]} {result[x]}")
             print(f"Hit: {cs.hitCount} Miss: {cs.missCount} Eviction: {cs.evictionCount}")
             
         #Help Usage

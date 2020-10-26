@@ -29,7 +29,7 @@ class CacheSim:
                 continue
             op_addr=self.convertHextoInstruction(lower_operation)
             getbyte=int(operation[1])
-            print(x)
+            #print(x)
             if(splitted[1]=="L"):
                 value=self.__load__(op_addr,getbyte)
             elif(splitted[1]=="S"):
@@ -37,8 +37,8 @@ class CacheSim:
             elif(splitted[1]=="M"):
                 value=self.__modify__(op_addr,getbyte)
             
-            print(value)
-            print("\n")
+            #print(value)
+            #print("\n")
             result.append(value)
 
         return result
@@ -55,10 +55,10 @@ class CacheSim:
                 self.cache.cacheSystem[op[1]].ls[indexWithTag].set_valid()
                 self.cache.cacheSystem[op[1]].ls[indexWithTag].set_byte(op[2],byte)
                 self.missCount+=1
-                print(f"Called cold miss")
+                #print(f"Called cold miss")
                 return " miss "
 
-        print(f"Called eviction miss")
+        #print(f"Called eviction miss")
         self.missCount+=1
         b=Block(2**self.b)
         b.set_valid()
@@ -85,10 +85,10 @@ class CacheSim:
                 self.cache.cacheSystem[op[1]].ls[indexWithTag].set_valid()
                 self.cache.cacheSystem[op[1]].ls[indexWithTag].set_byte(op[2],byte)
                 self.missCount+=1
-                print(f"Called cold miss")
+                #print(f"Called cold miss")
                 return " miss "
 
-        print(f"Called eviction miss")
+        #print(f"Called eviction miss")
         self.missCount+=1
         b=Block(2**self.b)
         b.set_valid()
