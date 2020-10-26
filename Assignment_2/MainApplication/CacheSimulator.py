@@ -64,7 +64,7 @@ class CacheSim:
 
         return result
 
-    def __load__(self,op,byte):
+    def __load__(self,op):
         print("Load")
         print(f"Finding Tag{op[0]}from Sindex{op[1]}")
         if(op[0] in self.cache.listOfTag(op[1])):
@@ -98,7 +98,7 @@ class CacheSim:
         return " miss "
 
 
-    def __store__(self,op,byte):
+    def __store__(self,op):
 
         if(op[0] in self.cache.listOfTag(op[1])):
             indexWithTag=self.cache.listOfTag(op[1]).index(op[0])
@@ -126,8 +126,8 @@ class CacheSim:
 
         return " miss "
 
-    def __modify__(self,op,byte):
-        return self.__load__(op,byte) + self.__store__(op,byte)
+    def __modify__(self,op):
+        return self.__load__(op) + self.__store__(op)
 
     def convertHextoInstruction(self,hexaddress):
         operationInDecimal=int(hexaddress,16)
