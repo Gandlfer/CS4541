@@ -89,7 +89,7 @@ class CacheSim:
             return " miss eviction"
 
         self.missCount+=1
-        return " miss 
+        return " miss "
 
     def __modify__(self,op,byte):
         return self.__load__(op,byte) + self.__store__(op,byte)
