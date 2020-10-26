@@ -52,19 +52,19 @@ class CacheSim:
             op_addr=self.convertHextoInstruction(lower_operation)
 
             if(splitted[1]=="L" or splitted[1]=="S"):
-                value=self.__load__(op_addr)
+                value=self.__loadAndstore__(op_addr)
 
             elif(splitted[1]=="S"):
-                value=self.__load__(op_addr)
+                value=self.__loadAndstore__(op_addr)
 
             elif(splitted[1]=="M"):
-                value=self.__load__(op_addr)+self.__load__(op_addr)
+                value=self.__loadAndstore__(op_addr)+self.__loadAndstore__(op_addr)
 
             result.append(value)
 
         return result
 
-    def __load__(self,op):
+    def __loadAndstore__(self,op):
         print("Load")
         print(f"Finding Tag{op[0]}from Sindex{op[1]}")
         if(op[0] in self.cache.listOfTag(op[1])):
@@ -97,37 +97,36 @@ class CacheSim:
 
         return " miss "
 
+    # def __store__(self,op):
 
-    def __store__(self,op):
+    #     if(op[0] in self.cache.listOfTag(op[1])):
+    #         indexWithTag=self.cache.listOfTag(op[1]).index(op[0])
 
-        if(op[0] in self.cache.listOfTag(op[1])):
-            indexWithTag=self.cache.listOfTag(op[1]).index(op[0])
+    #         if(self.cache.cacheSystem[op[1]].ls[indexWithTag].get_valid()==1):
+    #             self.hitCount+=1
+    #             return " hit "
 
-            if(self.cache.cacheSystem[op[1]].ls[indexWithTag].get_valid()==1):
-                self.hitCount+=1
-                return " hit "
+    #         else:
+    #             self.cache.cacheSystem[op[1]].ls[indexWithTag].set_valid()
+    #             self.missCount+=1
+    #             return " miss "
 
-            else:
-                self.cache.cacheSystem[op[1]].ls[indexWithTag].set_valid()
-                self.missCount+=1
-                return " miss "
+    #     self.missCount+=1
+    #     b=Block(2**self.b)
+    #     b.set_valid()
+    #     b.set_tag(op[0])
 
-        self.missCount+=1
-        b=Block(2**self.b)
-        b.set_valid()
-        b.set_tag(op[0])
+    #     if(self.cache.queueFull(op[1])):      
+    #         self.cache.eviction(op[1],b,True)
+    #         self.evictionCount+=1
+    #         return " miss eviction"
 
-        if(self.cache.queueFull(op[1])):      
-            self.cache.eviction(op[1],b,True)
-            self.evictionCount+=1
-            return " miss eviction"
+    #     self.cache.eviction(op[1],b,False)
 
-        self.cache.eviction(op[1],b,False)
+    #     return " miss "
 
-        return " miss "
-
-    def __modify__(self,op):
-        return self.__load__(op) + self.__store__(op)
+    # def __modify__(self,op):
+    #     return self.__load__(op) + self.__store__(op)
 
     def convertHextoInstruction(self,hexaddress):
         operationInDecimal=int(hexaddress,16)
