@@ -2,6 +2,7 @@ import sys
 from FileReader import FileReader
 from CacheSimulator import CacheSim
 
+#Main driver class that reads input and print result
 if __name__=="__main__":
     #./csim-ref -s 4 -E 1 -b 4 -t traces/yi.trace
     #Make sure command arguments is not empty
@@ -43,7 +44,7 @@ if __name__=="__main__":
 
             else:
                 print("Set, Associativity and Block size cannot be 0")
-                
+
         #Help Usage
         elif( "-h" in sys.argv[1]):
             print("Usage: python3 Application.py [-hv] -s <s> -E <E> -b <b> -t <tracefile>\n\t"+
