@@ -16,7 +16,6 @@ class CacheSim:
         value=""
         for x in ls:
             splitted=x.split(" ")
-            #print(splitted)
             operation=splitted[2].split(",")
             lower_operation=operation[0].lower()
             skip=False
@@ -29,7 +28,7 @@ class CacheSim:
                 continue
             op_addr=self.convertHextoInstruction(lower_operation)
             getbyte=int(operation[1])
-            #print(x)
+
             if(splitted[1]=="L"):
                 value=self.__load__(op_addr,getbyte)
             elif(splitted[1]=="S"):
@@ -37,8 +36,6 @@ class CacheSim:
             elif(splitted[1]=="M"):
                 value=self.__modify__(op_addr,getbyte)
             
-            #print(value)
-            #print("\n")
             result.append(value)
 
         return result
@@ -53,20 +50,16 @@ class CacheSim:
 
             else:
                 self.cache.cacheSystem[op[1]].ls[indexWithTag].set_valid()
-                #self.cache.cacheSystem[op[1]].ls[indexWithTag].set_byte(op[2],byte)
                 self.missCount+=1
-                #print(f"Called cold miss")
+
                 return " miss "
 
-        #print(f"Called eviction miss")
         self.missCount+=1
         b=Block(2**self.b)
         b.set_valid()
         b.set_tag(op[0])
-        #b.set_byte(op[2],byte)
 
         if(self.cache.queueFull(op[1])):        
-            #elf.cache.eviction(op[1],b,True)
             self.evictionCount+=1
             return " miss eviction"
         self.cache.eviction(op[1],b,False)
@@ -83,17 +76,13 @@ class CacheSim:
 
             else:
                 self.cache.cacheSystem[op[1]].ls[indexWithTag].set_valid()
-                #self.cache.cacheSystem[op[1]].ls[indexWithTag].set_byte(op[2],byte)
                 self.missCount+=1
-                #print(f"Called cold miss")
                 return " miss "
 
-        #print(f"Called eviction miss")
         self.missCount+=1
         b=Block(2**self.b)
         b.set_valid()
         b.set_tag(op[0])
-        #b.set_byte(op[2],byte)
 
         if(self.cache.queueFull(op[1])):        
             self.cache.eviction(op[1],b,True)
