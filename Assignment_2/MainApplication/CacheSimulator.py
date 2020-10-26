@@ -21,7 +21,7 @@ class CacheSim:
             lower_operation=operation[0].lower()
             skip=False
             for char in lower_operation:
-                if(not(char>=60 and char<=71 and char>=141 and char<=146)):
+                if(not((ord(char)>=48 and ord(char)<=57) or (ord(char)>=97 and ord(char)<=102))):
                     skip=True
                     break
             if (skip):
