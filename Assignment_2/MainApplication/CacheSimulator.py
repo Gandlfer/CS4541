@@ -36,18 +36,17 @@ class CacheSim:
             op_addr=self.convertHextoInstruction(lower_operation)
             getbyte=int(operation[1])
 
-            if(splitted[1]=="L"):
-                value=self.__load__(op_addr,getbyte)
-            elif(splitted[1]=="S"):
-                value=self.__store__(op_addr,getbyte)
+            if(splitted[1]=="L" or splitted[1]=="S"):
+                value=self.____loadAndstore____(op_addr,getbyte)
+
             elif(splitted[1]=="M"):
-                value=self.__modify__(op_addr,getbyte)
+                value=self.____loadAndstore____(op_addr,getbyte)+ self.____loadAndstore____(op_addr,getbyte)
             
             result.append(value)
 
         return result
 
-    def __load__(self,op,byte):
+    def __loadAndstore__(self,op,byte):
         
         if(op[0] in self.cache.listOfTag(op[1])):
             indexWithTag=self.cache.listOfTag(op[1]).index(op[0])
