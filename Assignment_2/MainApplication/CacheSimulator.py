@@ -53,7 +53,7 @@ class CacheSim:
 
             else:
                 self.cache.cacheSystem[op[1]].ls[indexWithTag].set_valid()
-                self.cache.cacheSystem[op[1]].ls[indexWithTag].set_byte(op[2],byte)
+                #self.cache.cacheSystem[op[1]].ls[indexWithTag].set_byte(op[2],byte)
                 self.missCount+=1
                 #print(f"Called cold miss")
                 return " miss "
@@ -63,10 +63,10 @@ class CacheSim:
         b=Block(2**self.b)
         b.set_valid()
         b.set_tag(op[0])
-        b.set_byte(op[2],byte)
+        #b.set_byte(op[2],byte)
 
         if(self.cache.queueFull(op[1])):        
-            self.cache.eviction(op[1],b,True)
+            #elf.cache.eviction(op[1],b,True)
             self.evictionCount+=1
             return " miss eviction"
         self.cache.eviction(op[1],b,False)
@@ -83,7 +83,7 @@ class CacheSim:
 
             else:
                 self.cache.cacheSystem[op[1]].ls[indexWithTag].set_valid()
-                self.cache.cacheSystem[op[1]].ls[indexWithTag].set_byte(op[2],byte)
+                #self.cache.cacheSystem[op[1]].ls[indexWithTag].set_byte(op[2],byte)
                 self.missCount+=1
                 #print(f"Called cold miss")
                 return " miss "
@@ -93,7 +93,7 @@ class CacheSim:
         b=Block(2**self.b)
         b.set_valid()
         b.set_tag(op[0])
-        b.set_byte(op[2],byte)
+        #b.set_byte(op[2],byte)
 
         if(self.cache.queueFull(op[1])):        
             self.cache.eviction(op[1],b,True)
