@@ -53,9 +53,14 @@ class CacheSim:
         b.set_valid()
         b.set_tag(op[0])
         b.set_byte(op[2],byte)
+
+        if(self.cache.queueFull([op[1]])):        
+            self.cache.eviction(op[1],b)
+            self.evictionCount+=1
+            return " miss eviction"
+
         self.missCount+=1
-        self.evictionCount+=1
-        return " miss "+self.cache.eviction(op[1],b)
+        return " miss "
 
 
     def __store__(self,op,byte):
@@ -77,8 +82,14 @@ class CacheSim:
         b.set_valid()
         b.set_tag(op[0])
         b.set_byte(op[2],byte)
+
+        if(self.cache.queueFull([op[1]])):        
+            self.cache.eviction(op[1],b)
+            self.evictionCount+=1
+            return " miss eviction"
+
         self.missCount+=1
-        return " miss "+self.cache.eviction(op[1],b)
+        return " miss 
 
     def __modify__(self,op,byte):
         return self.__load__(op,byte) + self.__store__(op,byte)

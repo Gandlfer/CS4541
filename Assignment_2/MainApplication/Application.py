@@ -22,7 +22,7 @@ if __name__=="__main__":
             #if("v" in sys.argv[1]):
                 #for x in range(len(calls)):
                     #print(f"{calls[x]} {result[x]}")
-            print(f"Hit: {cs.hitCount} Miss: {cs.missCount} Hit: {cs.evictionCount}")
+            print(f"Hit: {cs.hitCount} Miss: {cs.missCount} Eviction: {cs.evictionCount}")
             
         #Help Usage
         elif( "-h" in sys.argv[1]):

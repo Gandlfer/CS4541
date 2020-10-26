@@ -13,14 +13,11 @@ class Set:
         return ls
         
     def eviction(self,sIndex,blockdata):
-        evictionMsg=""
-        if(self.cacheSystem[sIndex].get_size()==self.maxsize):
-            self.cacheSystem[sIndex].dequeue()
-            evictionMsg="eviction"
+        self.cacheSystem[sIndex].dequeue()
         self.cacheSystem[sIndex].enqueue(blockdata)
 
-        return evictionMsg
-
+    def queueFull(self,sIndex):
+        return self.cacheSystem[sIndex].get_size==self.maxsize
 if __name__=="__main__":
     #q=Queue(3)
     # arr=[Queue(3)for x in range(2**2)]
