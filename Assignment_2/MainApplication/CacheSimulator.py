@@ -18,8 +18,16 @@ class CacheSim:
             splitted=x.split(" ")
             #print(splitted)
             operation=splitted[2].split(",")
-            #hexaddr=operation[0]
-            op_addr=self.convertHextoInstruction(operation[0])
+            lower_operation=operation[0].lower()
+            skip=False
+            for char in lower_operation:
+                if(not(char>=60 and char<=71 and char>=141 and char<=146)):
+                    skip=True
+                    break
+            if (skip):
+                result.append("Invalid Address")
+                continue
+            op_addr=self.convertHextoInstruction(lower_operation)
             getbyte=int(operation[1])
             print(x)
             if(splitted[1]=="L"):
