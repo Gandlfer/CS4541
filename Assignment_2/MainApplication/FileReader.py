@@ -14,6 +14,8 @@ class FileReader:
         for x in fileOpen.readlines():
             if(x[0]!="I" and x[0]!="\n"):
                 ls.append(x.replace("\n",""))
+
+        fileOpen.close()
         return ls
 
 if __name__=="__main__":
