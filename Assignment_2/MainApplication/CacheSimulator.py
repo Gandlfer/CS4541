@@ -1,5 +1,6 @@
 from Set import Set
 from Block import Block
+import sys
 class CacheSim:
     def __init__(self,s,e,b):
         self.hitCount=0
@@ -15,10 +16,15 @@ class CacheSim:
         result=[]
         value=""
         for x in ls:
-            splitted=x.split(" ")
-            operation=splitted[2].split(",")
-            lower_operation=operation[0].lower()
             skip=False
+            splitted=x.split(" ")
+            print(splitted)
+            if(len(splitted)>3 or len(splitted)<3 or(splitted[1]!="L" and splitted[1]!="S" and splitted[1]!="M")):
+                skip=True
+            else:
+                operation=splitted[2].split(",")
+                lower_operation=operation[0].lower()
+
             for char in lower_operation:
                 if(not((ord(char)>=48 and ord(char)<=57) or (ord(char)>=97 and ord(char)<=102))):
                     skip=True
@@ -26,6 +32,7 @@ class CacheSim:
             if (skip):
                 result.append("Invalid Address")
                 continue
+
             op_addr=self.convertHextoInstruction(lower_operation)
             getbyte=int(operation[1])
 
@@ -96,6 +103,7 @@ class CacheSim:
         return self.__load__(op,byte) + self.__store__(op,byte)
 
     def convertHextoInstruction(self,hexaddress):
+        print(hexaddress)
         operationInDecimal=int(hexaddress,16)
         offset=operationInDecimal&(2**self.b -1)
         operationInDecimal=operationInDecimal>>self.b
