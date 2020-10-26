@@ -37,10 +37,10 @@ class CacheSim:
             getbyte=int(operation[1])
 
             if(splitted[1]=="L" or splitted[1]=="S"):
-                value=self.____loadAndstore____(op_addr,getbyte)
+                value=self.__loadAndstore__(op_addr,getbyte)
 
             elif(splitted[1]=="M"):
-                value=self.____loadAndstore____(op_addr,getbyte)+ self.____loadAndstore____(op_addr,getbyte)
+                value=self.__loadAndstore__(op_addr,getbyte)+ self.__loadAndstore__(op_addr,getbyte)
             
             result.append(value)
 
