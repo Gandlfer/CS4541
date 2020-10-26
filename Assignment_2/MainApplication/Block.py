@@ -1,3 +1,8 @@
+# Date: 10/23/2020  
+# Class: CS4541  
+# Assignment: Assignment 1 - Cache Simulator  
+# Author(s): Darryl Ming Sen Lee 
+
 #class for one single block
 class Block:
     def __init__(self,b_size):

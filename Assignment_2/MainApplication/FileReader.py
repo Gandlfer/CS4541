@@ -1,23 +1,33 @@
+# Date: 10/23/2020  
+# Class: CS4541  
+# Assignment: Assignment 1 - Cache Simulator  
+# Author(s): Darryl Ming Sen Lee 
+
 import os
 
+#class for read file
 class FileReader:
     def __init__(self,path):
         self.path=path
 
     def openFileObject(self):
+        #Exception Handling when file not found
         try:
-            fileOpen=open(self.path,"r")
+            fileOpen=open(self.path,"r")#open file
+        
+        #Ends program when file not foud
         except(FileNotFoundError):
             print("File not found!\nCheck your file name and directory again!\n")
             os._exit(0)
+        #create empty list
         ls=[]
+
+        #Read file line by line
         for x in fileOpen.readlines():
-            if(x[0]!="I" and x[0]!="\n"):
+
+            #Get only L M S 
+            if(x[1]=="L" or x[1]=="M" or x[1]=="S"):
                 ls.append(x.replace("\n",""))
 
-        fileOpen.close()
+        fileOpen.close()#close file
         return ls
-
-if __name__=="__main__":
-    f=FileReader("traces/yi2.trace")
-    f.openFileObject()

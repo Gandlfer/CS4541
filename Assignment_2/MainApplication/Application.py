@@ -1,3 +1,8 @@
+# Date: 10/23/2020  
+# Class: CS4541  
+# Assignment: Assignment 1 - Cache Simulator  
+# Author(s): Darryl Ming Sen Lee 
+
 import sys
 from FileReader import FileReader
 from CacheSimulator import CacheSim
@@ -9,7 +14,7 @@ if __name__=="__main__":
     if(len(sys.argv)>=1):
         
         #check if every prefix exist 
-        if(("v" in sys.argv[1] or "s" in sys.argv[1]) and "-s" in sys.argv and "-E" in sys.argv and "-b" in sys.argv and
+        if(("-v" == sys.argv[1] or "-s" or sys.argv[1]) and "-s" in sys.argv and "-E" in sys.argv and "-b" in sys.argv and
             "-t" in sys.argv):
             #get the index of path based on prefix
             pathIndex=sys.argv.index("-t")+1
