@@ -39,6 +39,15 @@ class Implicit(Heap):
     #   a call to myrealloc with a size of zero is equivalent to a call to myfree    
     def myrealloc(self, pointer, size):
         newpointer=0
+        if(size==0):
+            return self.myfree(pointer)
+
+        else:
+            currentBlockSize=self.get_size(pointer)
+            pointerToNextBlock=pointer+currentBlockSize
+            nextBlockSize=pointerToNextBlock
+            #if(self.get_allocated(pointerToNextBlock)==0 and currentBlockSize+nextBlockSize==size):
+
         return newpointer
 
     def bestFit(self,size):
@@ -319,10 +328,13 @@ class Implicit(Heap):
 
 if __name__=="__main__":
     heap=Heap()
-    arr=[1,2,3]
+    arr=[1,2,3,4,5]
+    arr2=arr[1:3]
+    arr2[0]=1
     #arr.insert(1,(4,5,6))
-    arr[2:2]=[4,5,6]
+    #arr[2:2]=[4,5,6]
     print(arr)
+    print(arr2)
     #heap.initialHeapsize=1000
     #print(round(0%10))
     #print("0x"+'{0:02b}'.format(0))
