@@ -6,9 +6,11 @@ class Heap:
     # # endHeapPointer=3
 
     def __init__(self):
-        self.wordByte=4
-        self.alignment=8
+        #self.wordByte=4
+        #self.alignment=8
         self.initialHeapsize=1000
-        self.startHeapPointer=3
-        self.endHeapPointer=3
-        heap_array=[0]*self.wordByte*self.initialHeapsize
+        #self.startHeapPointer=3
+        self.startHeapPointer=1
+        #self.endHeapPointer=3
+        #heap_array=[0]*self.wordByte*self.initialHeapsize
+        heap_array=[0]*self.initialHeapsize
