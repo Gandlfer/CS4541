@@ -179,7 +179,7 @@ class Implicit(Heap):
         pointer_currentBlockFooter=pointer+currentBlockSize-1
 
         #check behind of current block for empty memory
-        if(pointer!=4):
+        if(pointer!=1):
             #pointer_previousBlockFooter=pointer-self.wordByte
             #previousBlockFooter=self.makeWordBlock(pointer_previousBlockFooter)
             pointer_previousBlockFooter=pointer-1
