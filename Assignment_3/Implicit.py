@@ -47,11 +47,13 @@ class Implicit(Heap):
         pointer=self.startHeapPointer
         pointer_toSmallestBlock=0 
         smallestSize=sys.maxsize
+        pointer_toFooter=0
         while(empty):
             
             if(pointer+size==self.initialHeapsize-1):
                 mysbrk(size)
 
+            #not found
             if(self.heap_array[pointer]==0 and smallestSize==sys.maxsize):
                 #empty=False
                 pointer_toFooter=pointer-1+size
@@ -60,17 +62,29 @@ class Implicit(Heap):
                 # self.splitValue(data,pointer_toFooter)
                 # self.toggleAllocatedBit(pointer)
                 # self.toggleAllocatedBit(pointer_toFooter)
-                data=self.toggleAllocatedBit(size<<1)
+                data=size<<1
                 self.heap_array[pointer]=data
                 self.heap_array[pointer_toFooter]=data
+                self.toggleAllocatedBit(pointer)
+                self.toggleAllocatedBit(pointer_toFooter)
                 
-                return pointer
+                #return pointer
+                #pointer
 
+            #end and no smallest found
             elif(self.heap_array[pointer]==0 and smallestSize!=sys.maxsize):
                 empty=False
+                data=size<<1
+                #self.toggleAllocatedBit(data)
+                self.heap_array[pointer_toSmallestBlock]=data
+                self.heap_array[pointer_toSmallestBlock+smallestSize-1]=data
+                self.toggleAllocatedBit(pointer_toSmallestBlock)
+                self.toggleAllocatedBit(pointer_toSmallestBlock+smallestSize-1)
+                #self.toggleAllocatedBit(self.heap_array[pointer_toSmallestBlock])
+                #self.toggleAllocatedBit(self.heap_array[pointer_toSmallestBlock+smallestSize-1])
 
-                self.toggleAllocatedBit(self.heap_array[pointer_toSmallestBlock])
-                self.toggleAllocatedBit(self.heap_array[pointer_toSmallestBlock+smallestSize-1])
+                pointer=pointer_toSmallestBlock
+                pointer_toFooter=pointer_toSmallestBlock+smallestSize-1
 
             else:
                 #header=hexToDecimal(makeWordBlock(pointer,pointer+3))
@@ -80,8 +94,8 @@ class Implicit(Heap):
                 allocated_size=self.get_size(self.heap_array[pointer])
                 if(self.get_allocated(self.heap_array[pointer])==0):
                     if(allocated_size==size):
-                        self.toggleAllocatedBit(self.heap_array[pointer])
-                        self.toggleAllocatedBit(self.heap_array[pointer+allocated_size-1])
+                        self.toggleAllocatedBit(pointer)
+                        self.toggleAllocatedBit(pointer+allocated_size-1)
                         return pointer
 
                     elif(allocated_size>size and allocated_size<smallestSize):
@@ -91,30 +105,47 @@ class Implicit(Heap):
                         pointer_toSmallestBlock=pointer
                         smallestSize=allocated_size
                         
-
                 pointer=pointer+allocated_size
+        pointer_toLeftOverHeader=pointer_toFooter+1
+        newSize=allocated_size-size
+        if(newSize>=2):
+            data=size<<1
+            #self.toggleAllocatedBit(data)
+            self.heap_array[pointer_toLeftOverHeader]=data
+            self.heap_array[pointer_toLeftOverHeader+newSize-1]=data
+            self.toggleAllocatedBit(pointer_toLeftOverHeader)
+            self.toggleAllocatedBit(pointer_toLeftOverHeader+newSize-1)
 
-        return pointer_toSmallestBlock
+        #leftOverSize=
+
+        return pointer
 
     def firstFit(self,size):
         empty=True
         pointer=self.startHeapPointer
-
+        pointer_toFooter=0
+        allocated_size=0
         while(empty):
             
             if(pointer+size==self.initialHeapsize-1):
                 mysbrk(size)
 
+            #if allocated block dont have that size
+            #create new allocatedblock
             if(self.heap_array[pointer]==0):
 
                 pointer_toFooter=pointer-1+size
 
-                data=self.toggleAllocatedBit(size<<1)
+                data=size<<1
+                #self.toggleAllocatedBit(data)
                 self.heap_array[pointer]=data
                 self.heap_array[pointer_toFooter]=data
+                self.toggleAllocatedBit(pointer)
+                self.toggleAllocatedBit(pointer_toFooter)
                 
                 return pointer
-   
+
+            #get each allocated block
             else:
                 #header=hexToDecimal(makeWordBlock(pointer,pointer+3))
                 #header=self.makeWordBlock(pointer)
@@ -122,12 +153,31 @@ class Implicit(Heap):
                 allocated_size=self.get_size(self.heap_array[pointer])
                 if(self.get_allocated(self.heap_array[pointer])==0): 
                     if(allocated_size>=size):
-                        self.toggleAllocatedBit(self.heap_array[pointer])
-                        self.toggleAllocatedBit(self.heap_array[pointer+allocated_size-1])
-                        return pointer
+                        pointer_toFooter=pointer+allocated_size-1
+                        data=size<<1
+                        #self.toggleAllocatedBit(data)
+                        self.heap_array[pointer]=data
+                        self.heap_array[pointer_toFooter]=data
+                        self.toggleAllocatedBit(pointer)
+                        self.toggleAllocatedBit(pointer_toFooter)
+                        break
+                        #self.toggleAllocatedBit(self.heap_array[pointer])
+                        #self.toggleAllocatedBit(self.heap_array[pointer+allocated_size-1])
+                        #return pointer
 
                 pointer=pointer+allocated_size
 
+        pointer_toLeftOverHeader=pointer_toFooter+1
+        newSize=allocated_size-size
+        if(newSize>=2):
+            data=size<<1
+            #self.toggleAllocatedBit(data)
+            self.heap_array[pointer_toLeftOverHeader]=data
+            self.heap_array[pointer_toLeftOverHeader+newSize-1]=data
+            self.toggleAllocatedBit(pointer_toLeftOverHeader)
+            self.toggleAllocatedBit(pointer_toLeftOverHeader+newSize-1)
+
+        return pointer
     # frees the block pointed to by the input parameter "pointer"
     #   returns nothing
     #   only works if "pointer" represents a previously allocated or reallocated block that has not yet been freed
@@ -144,8 +194,8 @@ class Implicit(Heap):
         else:
             #allocated_size=self.get_size(header)
             allocated_size=self.get_size(self.heap_array[pointer])
-            self.toggleAllocatedBit(self.heap_array[pointer])
-            self.toggleAllocatedBit(self.heap_array[pointer+allocated_size-1])
+            self.toggleAllocatedBit(pointer)
+            self.toggleAllocatedBit(pointer+allocated_size-1)
 
             self.zeroBlock(pointer,allocated_size)
             #self.splitValue(0,pointer+4,allocated_size-8)
