@@ -1,3 +1,8 @@
+# Date: 11/15/2020  
+# Class: CS4541  
+# Assignment: Assignment 3 - Memory Allocation  
+# Author(s): Darryl Ming Sen Lee 
+
 import os
 
 #class for read file

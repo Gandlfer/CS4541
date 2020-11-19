@@ -1,3 +1,8 @@
+# Date: 11/15/2020  
+# Class: CS4541  
+# Assignment: Assignment 3 - Memory Allocation  
+# Author(s): Darryl Ming Sen Lee 
+
 from HeapClass import Heap
 import sys
 
@@ -13,7 +18,7 @@ class Implicit(Heap):
     def myalloc(self,size):
 
         pointer=0
-        
+
         #find the closest number to 8
         allocating_size=size+8
         maskValue=allocating_size & 7
@@ -30,24 +35,35 @@ class Implicit(Heap):
 
             pointer=self.bestFit(shiftedAllocated_size)
 
-        tempSize=size
-
+        
+        padding=shiftedAllocated_size*4-allocating_size
+        allocating_size=allocating_size-8
+        
         for x in range(pointer+1,pointer+shiftedAllocated_size-1):
 
-            if(tempSize/4>=1):#stored data
+            if(allocating_size>=4):
 
-                tempSize=tempSize-4
+                allocating_size=allocating_size-4
                 self.heap_array[x]=2863311530
 
-            else:
+            elif(allocating_size>0):
 
-                for y in range(tempSize):#stored data by byte
+                for y in range(allocating_size):
+                    self.heap_array[x]=self.heap_array[x]+self.data*256**(y)
 
-                    self.heap_array[x]=self.heap_array[x]+self.data*32**(y)
+                remaindingPadding=4-allocating_size
 
-                for y in range(4-tempSize):#padding
+                for y in range(allocating_size,allocating_size+remaindingPadding):
 
-                    self.heap_array[x]=self.heap_array[x]+self.paddingData*32**(y)
+                    self.heap_array[x]=self.heap_array[x]+self.paddingData*256**(y)
+                
+                allocating_size=0
+
+                padding=padding-remaindingPadding
+
+            elif(padding>=4):
+                padding=padding-4
+                self.heap_array[x]=4294967295
         
         return pointer
 
@@ -289,9 +305,12 @@ class Implicit(Heap):
                     self.heap_array[pointer_nextBlockHeader]=0 # clear the next block Header 
                     self.heap_array[pointer_currentBlockFooter]=0 # clear the current block footer
 
-    # convert string of hexadecimal to int
-    def hexToDecimal(self,hexa):
-        return int(hexa,16)
+    # # convert string of hexadecimal to int
+    # def hexToDecimal(self,hexa):
+    #     return int(hexa,16)
+
+    def decimalToHex(self,dec):
+        return "0x{:08x}".format(dec)
 
     # clear a block from start pointer and how many blocks should be cleared
     def zeroBlock(self,pointer,size):
@@ -339,4 +358,12 @@ class Implicit(Heap):
                 print(f"Footer: at index {pointer_toFooter} value={self.heap_array[pointer_toFooter]}")
 
                 pointer=pointer+allocated_size
+
+    def writeHeap(self):
+        fileName="output.txt"
+        openFile=open(fileName,"w")
+        for x in range(len(self.heap_array)):
+            openFile.write(f"{x}, {self.decimalToHex(self.heap_array[x])}\n")
+        openFile.close()
+
 #if __name__=="__main__":
